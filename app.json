@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Hearts",
+    "icon": "./assets/heartIcon.png",
+    "version": "1.0.0",
+    "slug": "hearts",
+    "sdkVersion": "27.0.0",
+    "ios": {
+      "bundleIdentifier": "com.karky.hearts"
+    },
+    "android": {
+      "package": "com.karky.hearts"
+    }
+  }
+}

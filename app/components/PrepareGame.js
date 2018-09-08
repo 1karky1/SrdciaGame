@@ -1,54 +1,50 @@
 import React, {Component} from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
 import {
     StyleSheet,
     Text,
     View,
     TextInput,
     Button,
+    ScrollView,
 } from 'react-native';
 
-export default class PrepareGame extends Component {
+class PrepareGame extends Component {
     render() {
+        const {playersCount} = this.props;
         return (
+            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainerStyle}>
             <View style={styles.prepareGamePage}>
                 <Text>
-                    Zadaj hracov
+                    Zadaj hracov {playersCount}
                 </Text>
-                <Text>
-                    Hrac 1
-                </Text>
-                <TextInput
-                    placeholder={'Meno'}
-                />
-                <Text>
-                    Hrac 2
-                </Text>
-                <TextInput
-                    placeholder={'Meno'}
-                />
-                <Text>
-                    Hrac 3
-                </Text>
-                <TextInput
-                    placeholder={'Meno'}
-                />
-                <Text>
-                    Hrac 4
-                </Text>
-                <TextInput
-                    placeholder={'Meno'}
-                />
+                {[...Array(playersCount)].map((item, index) =>
+                    <View key={index}>
+                        <Text>
+                            {index + 1}. Hrac
+                        </Text>
+                        <TextInput placeholder={'Meno'}/>
+                    </View>
+                )}
                 <Button
                     onPress={() => this.props.navigation.navigate('Game')}
                     title="Start"
                     color="#841584"
                 />
             </View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    contentContainerStyle: {
+        justifyContent: 'center'
+    },
+    container: {
+        flex: 1,
+    },
     prepareGamePage: {
         padding: 40,
         flex: 1,
@@ -56,3 +52,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
 });
+
+
+const mapStateToProps = state => ({
+    playersCount: state.settings.playersCount,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrepareGame);

@@ -1,5 +1,6 @@
-import * as gameConstants from './gameConstants'
+import * as game from './game'
+import * as settings from './settings'
 
 export default {
-    game: gameConstants
+    game, settings
 }

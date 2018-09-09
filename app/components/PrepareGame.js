@@ -14,7 +14,7 @@ class PrepareGame extends Component {
     render() {
         const {playersCount} = this.props;
         return (
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainerStyle}>
+            <ScrollView contentContainerStyle={styles.contentContainerStyle}>
             <View style={styles.prepareGamePage}>
                 <Text>
                     Zadaj hracov {playersCount}
@@ -40,10 +40,7 @@ class PrepareGame extends Component {
 
 const styles = StyleSheet.create({
     contentContainerStyle: {
-        justifyContent: 'center'
-    },
-    container: {
-        flex: 1,
+        flexGrow: 1
     },
     prepareGamePage: {
         padding: 40,

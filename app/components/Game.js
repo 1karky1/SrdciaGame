@@ -6,33 +6,8 @@ import {
     View,
     ScrollView,
 } from 'react-native';
-
-const players = [
-    {
-        name: 'marek',
-        data: {
-
-        }
-    },
-    {
-        name: 'martin',
-        data: {
-
-        }
-    },
-    {
-        name: 'miso',
-        data: {
-
-        }
-    },
-    {
-        name: 'miro',
-        data: {
-
-        }
-    },
-];
+import {bindActionCreators} from "redux";
+import connect from "react-redux/es/connect/connect";
 
 let ROUNDS = [
     [10, 10, 10, 10],
@@ -40,7 +15,7 @@ let ROUNDS = [
     [10, 10, 10, 10]
 ];
 
-export default class Game extends Component {
+class Game extends Component {
 
     state = {
         rounds: ROUNDS
@@ -57,8 +32,9 @@ export default class Game extends Component {
     };
 
     render() {
+        const {players} = this.props;
         return (
-            <ScrollView>
+            <ScrollView contentContainerStyle={styles.contentContainerStyle}>
             <View style={styles.gamePage}>
                 <View style={{height: 20}}>
                     <View style={styles.gameRow}>
@@ -106,6 +82,10 @@ export default class Game extends Component {
 }
 
 const styles = StyleSheet.create({
+    contentContainerStyle: {
+        flexGrow: 1
+
+    },
     gamePage: {
         padding: 10,
         flex: 1,
@@ -122,3 +102,13 @@ const styles = StyleSheet.create({
     },
 
 });
+
+
+const mapStateToProps = state => ({
+    players: state.game.players,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

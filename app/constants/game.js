@@ -1,1 +1,2 @@
-export const TEST = 'TEST';
+export const SET_PLAYER = 'SET_PLAYER';
+export const RESET = 'RESET';

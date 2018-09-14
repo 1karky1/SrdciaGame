@@ -1,38 +1,37 @@
 import React, {Component} from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
+import {connect} from "react-redux";
 import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    ScrollView,
+    StyleSheet, Text, View,
+    Button, ScrollView,
 } from 'react-native';
+import Input from './Input';
+import {setPlayer} from '../actions/gameActions'
 
 class PrepareGame extends Component {
+
     render() {
-        const {playersCount} = this.props;
+        const {navigation, players, setPlayer} = this.props;
         return (
             <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-            <View style={styles.prepareGamePage}>
-                <Text>
-                    Zadaj hracov {playersCount}
-                </Text>
-                {[...Array(playersCount)].map((item, index) =>
-                    <View key={index}>
-                        <Text>
-                            {index + 1}. Hrac
-                        </Text>
-                        <TextInput placeholder={'Meno'}/>
-                    </View>
-                )}
-                <Button
-                    onPress={() => this.props.navigation.navigate('Game')}
-                    title="Start"
-                    color="#841584"
-                />
-            </View>
+                <View style={styles.prepareGamePage}>
+                    <Text>
+                        Zadaj mena hracov
+                    </Text>
+                    {players.map((item, index) =>
+                        <Input
+                                key={index}
+                                placeholder={'Meno'}
+                                value={players[index].name || ''}
+                                onStopEditing={setPlayer.bind(this, index, players)}
+                            />
+                    )}
+                    <Button
+                        onPress={() => navigation.navigate('Game')}
+                        title="Start"
+                        color="#841584"
+                    />
+                </View>
             </ScrollView>
         )
     }
@@ -52,10 +51,11 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    playersCount: state.settings.playersCount,
+    players: state.game.players,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+    setPlayer,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrepareGame);

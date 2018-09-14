@@ -1,33 +1,17 @@
 import constants from '../constants'
 
-//actions for players could be SET_PLAYERS, RENAME_PLAYER
 const initialState = {
-    players: [
-        {
-            name: 'marek',
-            games: {1: 10},
-            points: []
-        },
-        {
-            name: 'martin',
-            points: []
-        },
-        {
-            name: 'miso',
-            points: []
-        },
-        {
-            name: 'miro',
-            points: []
-        },
-    ]
-
+    players: [{}, {}, {}, {}],
+    error: undefined
 };
 
 export default (state=initialState, action) => {
     switch (action.type){
-        case constants.game.TEST:
+        case constants.game.SET_PLAYER:
+            if (action.hasOwnProperty('type')) delete action.type;
             return Object.assign({}, state, {...action});
+        case constants.game.RESET:
+            return Object.assign({}, initialState);
         default:
             return state
     }

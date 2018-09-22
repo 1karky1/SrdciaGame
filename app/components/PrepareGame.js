@@ -5,7 +5,7 @@ import {
     StyleSheet, Text, View,
     Button, ScrollView,
 } from 'react-native';
-import Input from './Input';
+import Input from './generic/Input';
 import {setPlayer} from '../actions/gameActions'
 
 class PrepareGame extends Component {

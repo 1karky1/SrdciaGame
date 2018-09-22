@@ -1,7 +1,7 @@
 import constants from '../constants'
 
 const initialState = {
-    players: [{}, {}, {}, {}],
+    players: [{name: 'Hrac 1'}, {name: 'Hrac 2'}, {name: 'Hrac 3'}, {name: 'Hrac 4'}],
     error: undefined
 };
 

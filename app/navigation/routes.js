@@ -1,5 +1,5 @@
 import Menu from "../components/Menu";
-import Game from "../components/Game";
+import Game from "../components/game/Game";
 import PrepareGame from "../components/PrepareGame";
 
 export default {

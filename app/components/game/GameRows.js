@@ -5,9 +5,10 @@ import GameRow from "./GameRow";
 
 export default class GameRows extends Component {
     render() {
+        const {rounds} = this.props;
         return (
             <View>
-                {this.state.rounds.map((round, index) =>
+                {rounds.map((round, index) =>
                     <GameRow key={index} round={round} />
                 )}
             </View>

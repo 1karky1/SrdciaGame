@@ -1,53 +1,35 @@
 import React, {Component} from 'react';
-import {
-    Button,
-    StyleSheet,
-    View,
-    ScrollView,
-} from 'react-native';
+import { Button, StyleSheet, View, ScrollView,} from 'react-native';
 import {bindActionCreators} from "redux";
 import connect from "react-redux/es/connect/connect";
 import GameHeader from "./GameHeader";
 import GameResult from "./GameResult";
 import GameRows from "./GameRows";
-
-let ROUNDS = [
-    [10, 10, 10, 10],
-    [10, 10, 10, 10],
-    [10, 10, 10, 10]
-];
+import {addRound} from "../../actions/gameActions";
 
 class Game extends Component {
 
-    state = {
-        rounds: ROUNDS
-    };
-
     pointsTogether = () => {
-        return this.state.rounds.reduce((acc, round) => {
+        return this.props.rounds.reduce((acc, round) => {
             return [acc[0] + round[0], acc[1] + round[1], acc[2] + round[2], acc[3] + round[3]]
         }, [0,0,0,0]);
     };
 
-    addRound = (round) => {
-        this.setState({rounds: this.state.rounds.concat([round])})
-    };
-
     render() {
-        const {players} = this.props;
+        const {players, rounds, addRound, navigation} = this.props;
         return (
             <ScrollView contentContainerStyle={styles.contentContainerStyle}>
                 <View style={styles.gamePage}>
                     <GameHeader players={players}/>
-                    <GameRows rounds={this.state.rounds}/>
+                    <GameRows rounds={rounds}/>
                     <GameResult pointsTogether={this.pointsTogether()}/>
                     <Button
-                        onPress={() => this.addRound([20, 20, 20, 20])}
+                        onPress={() => addRound([0, 0, 0, 0])}
                         title="Add round"
                         color="#841584"
                     />
                     <Button
-                        onPress={() => this.props.navigation.navigate('Menu')}
+                        onPress={() => navigation.navigate('Menu')}
                         title="Exit"
                         color="#841584"
                     />
@@ -82,9 +64,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     players: state.game.players,
+    rounds: state.game.rounds,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+    addRound,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

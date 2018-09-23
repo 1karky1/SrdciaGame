@@ -23,7 +23,7 @@ class PrepareGame extends Component {
                                 key={index}
                                 placeholder={'Meno'}
                                 value={players[index].name || ''}
-                                onStopEditing={setPlayer.bind(this, index, players)}
+                                onStopEditing={setPlayer.bind(this, index)}
                             />
                     )}
                     <Button

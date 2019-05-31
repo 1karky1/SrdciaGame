@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 
-export default class Menu extends Component {
+export default class GameMenu extends Component {
     onPressLearnMore = (m) => {
         Alert.alert(m);
     };
@@ -18,7 +18,7 @@ export default class Menu extends Component {
                 <View style={styles.menuButton}>
                     <Button
                         style={styles.menuButton}
-                        onPress={() => this.props.navigation.navigate('PrepareGame')}
+                        onPress={() => this.props.navigation.navigate('CreateUsers')}
                         title="Start Game"
                         color="#841584"
                         accessibilityLabel=""

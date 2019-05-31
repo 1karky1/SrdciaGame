@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, StyleSheet, View, ScrollView,} from 'react-native';
 import {bindActionCreators} from "redux";
-import connect from "react-redux/es/connect/connect";
+import {connect} from "react-redux";
 import GameHeader from "./GameHeader";
 import GameResult from "./GameResult";
 import GameRows from "./GameRows";
@@ -29,7 +29,7 @@ class Game extends Component {
                         color="#841584"
                     />
                     <Button
-                        onPress={() => navigation.navigate('Menu')}
+                        onPress={() => navigation.navigate('GameMenu')}
                         title="Exit"
                         color="#841584"
                     />

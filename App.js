@@ -1,10 +1,13 @@
+import React from "react";
 import { Provider } from 'react-redux';
-import React from 'react';
-import {StatusBar} from 'react-native';
-import store from './app/store'
-import {AppWithNavigationState} from './app/navigation/AppNavigator'
+import store from './app/store';
+import { createAppContainer } from "react-navigation";
+import navigator from "./app/navigator";
+import { StatusBar } from 'react-native';
 
-export default class Root extends React.Component {
+const AppNavigation = createAppContainer(navigator);
+
+export default class App extends React.Component {
 
     componentDidMount() {
         StatusBar.setHidden(true);
@@ -13,9 +16,8 @@ export default class Root extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <AppWithNavigationState />
+                <AppNavigation />
             </Provider>
         );
     }
-}
-
+};

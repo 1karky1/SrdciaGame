@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from "react-redux";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
 import {
     StyleSheet, Text, View,
     Button, ScrollView,
 } from 'react-native';
-import Input from './generic/Input';
+import Input from '../components/generic/Input';
 import {setPlayer} from '../actions/gameActions'
 
-class PrepareGame extends Component {
+class CreateUsers extends Component {
 
     render() {
         const {navigation, players, setPlayer} = this.props;
         return (
             <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-                <View style={styles.prepareGamePage}>
+                <View style={styles.createUsersPage}>
                     <Text>
                         Zadaj mena hracov
                     </Text>
@@ -27,8 +27,13 @@ class PrepareGame extends Component {
                             />
                     )}
                     <Button
-                        onPress={() => navigation.navigate('Game')}
+                        onPress={() => this.props.navigation.navigate('Game')}
                         title="Start"
+                        color="#841584"
+                    />
+                    <Button
+                        onPress={() => navigation.navigate('GameMenu')}
+                        title="Exit"
                         color="#841584"
                     />
                 </View>
@@ -41,7 +46,7 @@ const styles = StyleSheet.create({
     contentContainerStyle: {
         flexGrow: 1
     },
-    prepareGamePage: {
+    createUsersPage: {
         padding: 40,
         flex: 1,
         justifyContent: 'center',
@@ -58,4 +63,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     setPlayer,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrepareGame);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUsers);
